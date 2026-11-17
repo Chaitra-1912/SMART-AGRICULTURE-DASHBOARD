@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriPulse | Smart Agriculture Dashboard</title>
+<style>
+:root{--green:#176b45;--green2:#238653;--mint:#eaf5ee;--ink:#17251d;--muted:#718078;--line:#e5ece7;--bg:#f5f8f5;--white:#fff;--amber:#f0a52b;--red:#d95c52;--shadow:0 8px 28px rgba(25,65,43,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif}button,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#123e2c;color:#fff;padding:25px 17px;display:flex;flex-direction:column;flex-shrink:0}.brand{display:flex;align-items:center;gap:11px;padding:0 10px 30px;font-size:19px;font-weight:800;letter-spacing:.2px}.brand-mark{width:37px;height:37px;border-radius:12px;background:#d9f2df;color:#176b45;display:grid;place-items:center;font-size:21px}.nav-label{color:#9db9a8;font-size:10px;letter-spacing:1.6px;font-weight:800;padding:10px 12px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#d5e4da;text-align:left;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:#245a40;color:white}.nav .ico{width:20px;text-align:center;font-size:17px}.side-bottom{margin-top:auto;border-top:1px solid #32634a;padding:18px 10px 0;color:#b9d0c1;font-size:12px;line-height:1.6}.main{flex:1;min-width:0;padding:28px 34px 40px;max-width:1600px;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:25px}.eyebrow{font-size:11px;letter-spacing:1.4px;color:var(--green2);font-weight:800;text-transform:uppercase}.topbar h1{font-size:27px;margin:6px 0 0;letter-spacing:-.6px}.top-actions{display:flex;align-items:center;gap:10px}.date-pill,.user-pill{background:#fff;border:1px solid var(--line);padding:10px 13px;border-radius:11px;font-size:12px;color:#526158}.avatar{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#dff0e3;color:var(--green);font-weight:800;margin-right:7px}.page{display:none}.page.active{display:block}.welcome{background:linear-gradient(110deg,#174e35,#2a8052);color:#fff;border-radius:17px;padding:23px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px;box-shadow:var(--shadow)}.welcome h2{font-size:21px;margin:0 0 7px}.welcome p{margin:0;color:#d8eee0;font-size:13px}.welcome .sun{font-size:46px;opacity:.95}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:18px}.card{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:var(--shadow)}.metric-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.metric-icon{width:34px;height:34px;border-radius:10px;background:var(--mint);display:grid;place-items:center;font-size:17px}.metric-value{font-size:28px;font-weight:800;margin:12px 0 5px;letter-spacing:-.7px}.metric-foot{font-size:11px;color:#738178}.up{color:var(--green2);font-weight:700}.down{color:var(--red);font-weight:700}.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 13px;gap:12px}.section-head h3{font-size:16px;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:4px 0 0}.two-col{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.chart-card{min-height:280px}.chart-wrap{height:205px;position:relative;margin-top:12px}.chart-wrap canvas{width:100%;height:100%}.legend{display:flex;gap:15px;font-size:11px;color:var(--muted);margin-top:10px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}.status-list{display:grid;gap:15px;margin-top:16px}.status-row{display:flex;justify-content:space-between;align-items:center;font-size:12px}.status-label{display:flex;align-items:center;gap:9px}.status-dot{width:9px;height:9px;border-radius:50%;background:#31a66b}.status-dot.warn{background:var(--amber)}.status-dot.bad{background:var(--red)}.bar{height:7px;background:#edf2ee;border-radius:10px;margin-top:8px;overflow:hidden}.bar span{display:block;height:100%;border-radius:10px;background:#42a36b}.bar span.warn{background:var(--amber)}.bar span.bad{background:var(--red)}.table-card{padding:0;overflow:hidden}.table-title{padding:18px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.table-title h3{margin:0;font-size:15px}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:left;color:#829087;font-weight:700;background:#fbfcfb;padding:12px 18px}.table td{padding:14px 18px;border-top:1px solid #edf1ee}.tag{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:800;background:#e8f5ec;color:#27804d}.tag.warn{background:#fff4df;color:#a56a0c}.tag.bad{background:#ffebea;color:#b94b43}.btn{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-weight:700;font-size:12px;cursor:pointer}.btn:hover{background:#105637}.btn.light{background:#edf5ef;color:var(--green)}.btn.outline{background:#fff;border:1px solid var(--line);color:#44534a}.controls{display:flex;gap:9px;align-items:center}.select{padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#425047;font-size:12px}.farm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.farm-card h3{margin:0 0 5px;font-size:15px}.farm-card p{margin:0;color:var(--muted);font-size:11px}.farm-stat{display:flex;justify-content:space-between;margin-top:17px;font-size:12px}.farm-stat strong{font-size:15px}.sensor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.sensor-card .big{font-size:25px;font-weight:800;margin:13px 0 3px}.sensor-card small{color:var(--muted)}.irrigation-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.irrigation-card{display:flex;justify-content:space-between;align-items:center;gap:15px}.irrigation-card h3{margin:0 0 5px;font-size:14px}.irrigation-card p{margin:0;color:var(--muted);font-size:11px}.switch{width:48px;height:27px;border:0;border-radius:20px;background:#c8d2cb;padding:3px;cursor:pointer;flex-shrink:0;transition:.2s}.switch:after{content:"";display:block;width:21px;height:21px;background:#fff;border-radius:50%;transition:.2s}.switch.on{background:#2d995d}.switch.on:after{transform:translateX(21px)}.notice{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border:1px solid var(--line);border-radius:11px;margin-bottom:10px;background:#fff}.notice .nicon{font-size:18px}.notice strong{font-size:12px}.notice p{font-size:11px;color:var(--muted);margin:4px 0 0}.health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.health-score{font-size:30px;font-weight:800;margin:12px 0 3px}.muted{color:var(--muted);font-size:12px}.empty-note{color:var(--muted);font-size:11px;margin-top:14px}.footer-note{text-align:center;color:#91a097;font-size:10px;margin-top:25px}.mobile-menu{display:none}
+@media(max-width:1000px){.sidebar{width:205px}.main{padding:23px}.grid{grid-template-columns:repeat(2,1fr)}.farm-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.app{display:block}.sidebar{width:100%;padding:12px 14px;display:block}.brand{padding:0 5px 12px}.nav-label,.side-bottom{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px 11px;font-size:12px}.main{padding:18px 14px}.topbar{align-items:flex-start}.topbar h1{font-size:22px}.date-pill{display:none}.grid{gap:9px}.card{padding:14px}.metric-value{font-size:23px}.two-col,.farm-grid,.sensor-grid,.irrigation-grid,.health-grid{grid-template-columns:1fr}.welcome{padding:18px}.welcome .sun{font-size:34px}.table{min-width:580px}.table-card{overflow:auto}.user-pill{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><span class="brand-mark">🌱</span> AgriPulse</div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav class="nav">
+    <button class="active" data-page="overview"><span class="ico">▦</span> Overview</button>
+    <button data-page="farms"><span class="ico">🌾</span> Farms & Crops</button>
+    <button data-page="soil"><span class="ico">◉</span> Soil Monitoring</button>
+    <button data-page="weather"><span class="ico">☀</span> Weather</button>
+    <button data-page="irrigation"><span class="ico">💧</span> Irrigation</button>
+    <button data-page="health"><span class="ico">♡</span> Crop Health</button>
+    <button data-page="alerts"><span class="ico">🔔</span> Alerts</button>
+  </nav>
+  <div class="side-bottom">SMART FARMING, BETTER FUTURES<br>Dashboard preview · Demo mode</div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div><div class="eyebrow">SMART AGRICULTURE / CONTROL CENTER</div><h1 id="pageTitle">Farm Overview</h1></div>
+  <div class="top-actions"><div class="date-pill" id="today"></div><div class="user-pill"><span class="avatar">F</span>Farm Manager</div></div>
+</header>
+
+<section class="page active" id="overview">
+  <div class="welcome"><div><h2>Good day, Farm Manager 👋</h2><p>Here's what's happening across your farms today. Keep growing smarter.</p></div><div class="sun">🌿</div></div>
+  <div class="grid">
+    <div class="card"><div class="metric-top">Total Farms <span class="metric-icon">🏡</span></div><div class="metric-value">08</div><div class="metric-foot"><span class="up">+2</span> added this season</div></div>
+    <div class="card"><div class="metric-top">Active Crops <span class="metric-icon">🌱</span></div><div class="metric-value">24</div><div class="metric-foot"><span class="up">+8%</span> from last month</div></div>
+    <div class="card"><div class="metric-top">Avg. Soil Moisture <span class="metric-icon">💧</span></div><div class="metric-value" id="avgMoisture">64%</div><div class="metric-foot">Across all monitored fields</div></div>
+    <div class="card"><div class="metric-top">Active Alerts <span class="metric-icon">🔔</span></div><div class="metric-value" id="alertCount">03</div><div class="metric-foot"><span class="down">2 need attention</span></div></div>
+  </div>
+  <div class="two-col">
+    <div class="card chart-card"><div class="section-head" style="margin-top:0"><div><h3>Soil Moisture Trends</h3><p>Weekly average moisture level</p></div><select class="select" id="trendRange"><option value="week">This week</option><option value="month">This month</option></select></div><div class="chart-wrap"><canvas id="moistureChart"></canvas></div><div class="legend"><span><i class="dot" style="background:#2b8c59"></i>Moisture</span><span><i class="dot" style="background:#e8b14d"></i>Target level</span></div></div>
+    <div class="card chart-card"><div class="section-head" style="margin-top:0"><div><h3>Farm Conditions</h3><p>Current field status</p></div></div><div class="status-list" id="conditionList"></div></div>
+  </div>
+  <div class="section-head"><div><h3>Recent Field Activity</h3><p>Latest updates from your monitored farms</p></div><button class="btn light" onclick="go('alerts')">View all alerts</button></div>
+  <div class="card table-card"><table class="table"><thead><tr><th>FIELD</th><th>CROP</th><th>SOIL MOISTURE</th><th>STATUS</th><th>LAST UPDATED</th></tr></thead><tbody id="activityRows"></tbody></table></div>
+</section>
+
+<section class="page" id="farms">
+ <div class="section-head"><div><h3>Farm & Crop Directory</h3><p>Monitor the farms and crops registered in your system</p></div><button class="btn" onclick="addFarm()">+ Add Farm</button></div>
+ <div class="farm-grid" id="farmGrid"></div>
+</section>
+
+<section class="page" id="soil">
+ <div class="section-head"><div><h3>Live Soil Sensor Readings</h3><p>Illustrative sensor readings for monitored fields</p></div><div class="controls"><select class="select" id="soilFilter" onchange="filterSoil()"><option value="all">All farms</option><option value="North Field">North Field</option><option value="East Field">East Field</option><option value="South Field">South Field</option></select></div></div>
+ <div class="sensor-grid" id="soilGrid"></div>
+ <div class="card chart-card" style="margin-top:16px"><h3 style="margin:0;font-size:15px">Soil Moisture by Field</h3><p class="muted">Compare moisture levels across monitored fields</p><div class="chart-wrap"><canvas id="soilChart"></canvas></div></div>
+</section>
+
+<section class="page" id="weather">
+ <div class="welcome"><div><div class="eyebrow" style="color:#c7ebd2">LOCAL WEATHER · DEMO</div><h2 style="margin-top:7px">Partly Cloudy · 28°C</h2><p>Conditions are suitable for routine field inspection.</p></div><div class="sun">⛅</div></div>
+ <div class="grid">
+  <div class="card"><div class="metric-top">Temperature <span class="metric-icon">🌡️</span></div><div class="metric-value">28°C</div><div class="metric-foot">Feels like 30°C</div></div>
+  <div class="card"><div class="metric-top">Humidity <span class="metric-icon">💦</span></div><div class="metric-value">68%</div><div class="metric-foot">Moderate humidity</div></div>
+  <div class="card"><div class="metric-top">Rainfall <span class="metric-icon">🌧️</span></div><div class="metric-value">4.2 mm</div><div class="metric-foot">Expected today</div></div>
+  <div class="card"><div class="metric-top">Wind Speed <span class="metric-icon">💨</span></div><div class="metric-value">12 km/h</div><div class="metric-foot">Light breeze</div></div>
+ </div>
+ <div class="card"><h3 style="margin:0;font-size:15px">7-Day Weather Outlook</h3><p class="muted">Sample forecast for dashboard demonstration</p><div class="farm-grid" id="forecast" style="margin-top:18px"></div></div>
+</section>
+
+<section class="page" id="irrigation">
+ <div class="section-head"><div><h3>Irrigation Control Center</h3><p>Switch irrigation zones on or off for demonstration</p></div><span class="tag">MANUAL DEMO CONTROL</span></div>
+ <div class="grid">
+  <div class="card"><div class="metric-top">Zones Online <span class="metric-icon">💧</span></div><div class="metric-value" id="zonesOnline">2 / 4</div><div class="metric-foot">Based on demo toggles</div></div>
+  <div class="card"><div class="metric-top">Water Saved <span class="metric-icon">♻️</span></div><div class="metric-value">18%</div><div class="metric-foot">Estimated this week</div></div>
+  <div class="card"><div class="metric-top">Next Schedule <span class="metric-icon">⏱️</span></div><div class="metric-value">06:00</div><div class="metric-foot">Tomorrow morning</div></div>
+  <div class="card"><div class="metric-top">System Status <span class="metric-icon">⚙️</span></div><div class="metric-value" style="font-size:22px;color:#238653">Operational</div><div class="metric-foot">Demo simulation</div></div>
+ </div>
+ <div class="irrigation-grid" id="irrigationGrid"></div>
+ <p class="empty-note">Note: These controls update the dashboard demo state only. They are not connected to physical irrigation equipment.</p>
+</section>
+
+<section class="page" id="health">
+ <div class="section-head"><div><h3>Crop Health Overview</h3><p>Visual crop condition assessment using sample data</p></div><select class="select" id="healthFilter" onchange="filterHealth()"><option value="all">All crop types</option><option>Rice</option><option>Tomato</option><option>Cotton</option><option>Maize</option></select></div>
+ <div class="health-grid" id="healthGrid"></div>
+</section>
+
+<section class="page" id="alerts">
+ <div class="section-head"><div><h3>Alerts & Recommendations</h3><p>Items that may need farm manager attention</p></div><button class="btn light" onclick="clearAlerts()">Mark all reviewed</button></div>
+ <div id="alertList"></div>
+</section>
+<div class="footer-note">AgriPulse Smart Agriculture Dashboard · Academic demonstration · Sample / simulated data</div>
+</main>
+</div>
+<script>
+const fields=[
+ {name:"North Field",crop:"Rice",moisture:72,ph:6.5,temp:26,status:"Optimal",health:92,area:"12 acres"},
+ {name:"East Field",crop:"Tomato",moisture:38,ph:5.8,temp:29,status:"Needs water",health:74,area:"8 acres"},
+ {name:"South Field",crop:"Cotton",moisture:61,ph:6.8,temp:27,status:"Good",health:86,area:"15 acres"},
+ {name:"West Field",crop:"Maize",moisture:54,ph:7.1,temp:28,status:"Good",health:89,area:"10 acres"},
+ {name:"River Farm",crop:"Rice",moisture:81,ph:6.4,temp:25,status:"High moisture",health:78,area:"18 acres"},
+ {name:"Hill Farm",crop:"Tomato",moisture:49,ph:6.1,temp:30,status:"Monitor",health:68,area:"6 acres"}
+];
+let zones=[true,false,true,false];
+let alerts=[
+ {type:"warn",icon:"💧",title:"Low soil moisture detected",desc:"East Field moisture is at 38%. Consider reviewing its irrigation schedule.",time:"10 minutes ago"},
+ {type:"bad",icon:"🌡️",title:"Temperature rising",desc:"Hill Farm is recording a higher field temperature. Monitor crop conditions.",time:"35 minutes ago"},
+ {type:"warn",icon:"🌱",title:"Crop health needs review",desc:"Tomato crop health at Hill Farm is below the preferred range.",time:"1 hour ago"}
+];
+const $=id=>document.getElementById(id);
+function go(page){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===page));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));const names={overview:"Farm Overview",farms:"Farms & Crops",soil:"Soil Monitoring",weather:"Weather Monitoring",irrigation:"Irrigation Management",health:"Crop Health",alerts:"Alerts & Recommendations"};$("pageTitle").textContent=names[page];if(page==="soil")drawSoilChart();if(page==="overview")drawMoistureChart();}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+$("today").textContent=new Date().toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
+function drawBars(canvasId,labels,values,max=100,color="#2b8c59"){const c=$(canvasId);if(!c)return;const ctx=c.getContext("2d"),w=c.clientWidth,h=c.clientHeight,dpr=window.devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);const left=34,right=12,top=12,bottom=30,plotH=h-top-bottom,plotW=w-left-right;ctx.font="10px Segoe UI";ctx.fillStyle="#849188";ctx.strokeStyle="#edf1ee";ctx.lineWidth=1;for(let i=0;i<=4;i++){let y=top+plotH*i/4;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-right,y);ctx.stroke();ctx.fillText(String(Math.round(max-i*max/4)),3,y+3)}const gap=plotW/labels.length,bw=Math.min(25,gap*.48);values.forEach((v,i)=>{let bh=plotH*v/max,x=left+gap*i+(gap-bw)/2,y=top+plotH-bh;ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,bw,bh,5);ctx.fill();ctx.fillStyle="#718078";ctx.textAlign="center";ctx.fillText(labels[i],x+bw/2,h-8)});ctx.textAlign="left";}
+function drawMoistureChart(){const range=$("trendRange").value;drawBars("moistureChart",range==="week"?["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]:["W1","W2","W3","W4"],range==="week"?[54,61,58,67,63,70,64]:[57,62,66,64]);}
+$("trendRange").addEventListener("change",drawMoistureChart);
+function drawSoilChart(){drawBars("soilChart",fields.slice(0,6).map(f=>f.name.split(" ")[0]),fields.slice(0,6).map(f=>f.moisture));}
+function renderOverview(){const avg=Math.round(fields.reduce((a,f)=>a+f.moisture,0)/fields.length);$("avgMoisture").textContent=avg+"%";$("alertCount").textContent=String(alerts.length).padStart(2,"0");$("conditionList").innerHTML=fields.slice(0,4).map(f=>`<div><div class="status-row"><span class="status-label"><i class="status-dot ${f.moisture<45?'warn':''}"></i>${f.name}</span><strong>${f.moisture}%</strong></div><div class="bar"><span class="${f.moisture<45?'warn':''}" style="width:${f.moisture}%"></span></div></div>`).join("");$("activityRows").innerHTML=fields.slice(0,4).map(f=>`<tr><td><strong>${f.name}</strong></td><td>${f.crop}</td><td>${f.moisture}%</td><td><span class="tag ${f.moisture<45?'warn':''}">${f.status}</span></td><td>Just now</td></tr>`).join("");}
+function renderFarms(){$("farmGrid").innerHTML=fields.map(f=>`<div class="card farm-card"><div class="metric-top">FARM LOCATION <span class="metric-icon">🌾</span></div><h3>${f.name}</h3><p>${f.crop} · ${f.area}</p><div class="farm-stat"><span>Soil moisture</span><strong>${f.moisture}%</strong></div><div class="bar"><span style="width:${f.moisture}%"></span></div><div class="farm-stat"><span>Crop health</span><strong>${f.health}/100</strong></div><div class="farm-stat"><span>Status</span><span class="tag ${f.moisture<45?'warn':''}">${f.status}</span></div></div>`).join("");}
+function filterSoil(){const val=$("soilFilter").value;const list=fields.filter(f=>val==="all"||f.name===val);$("soilGrid").innerHTML=list.map(f=>`<div class="card sensor-card"><div class="metric-top">${f.name}<span class="metric-icon">💧</span></div><div class="big">${f.moisture}%</div><small>Soil moisture</small><div class="bar"><span style="width:${f.moisture}%"></span></div><div class="farm-stat"><span>Soil pH</span><strong>${f.ph}</strong></div><div class="farm-stat"><span>Temperature</span><strong>${f.temp}°C</strong></div></div>`).join("");}
+function renderIrrigation(){$("irrigationGrid").innerHTML=zones.map((on,i)=>`<div class="card irrigation-card"><div><h3>💧 Irrigation Zone ${i+1}</h3><p>${["North Field","East Field","South Field","West Field"][i]} · ${on?"Currently active":"Currently inactive"}</p><div style="margin-top:9px"><span class="tag ${on?"":"warn"}">${on?"RUNNING":"STOPPED"}</span></div></div><button class="switch ${on?"on":""}" aria-label="Toggle irrigation zone ${i+1}" onclick="toggleZone(${i})"></button></div>`).join("");$("zonesOnline").textContent=zones.filter(Boolean).length+" / 4";}
+function toggleZone(i){zones[i]=!zones[i];renderIrrigation();}
+function renderHealth(){const val=$("healthFilter").value;const list=fields.filter(f=>val==="all"||f.crop===val);$("healthGrid").innerHTML=list.map(f=>`<div class="card"><div class="metric-top">${f.name}<span class="metric-icon">🌿</span></div><div class="muted">${f.crop} crop</div><div class="health-score">${f.health}<span style="font-size:13px;color:#819087">/100</span></div><div class="bar"><span class="${f.health<75?'warn':''}" style="width:${f.health}%"></span></div><div class="farm-stat"><span>Health condition</span><span class="tag ${f.health<75?'warn':''}">${f.health>=85?"Healthy":f.health>=75?"Moderate":"Needs review"}</span></div></div>`).join("");}
+function filterHealth(){renderHealth();}
+function renderAlerts(){$("alertList").innerHTML=alerts.length?alerts.map((a,i)=>`<div class="notice"><span class="nicon">${a.icon}</span><div style="flex:1"><strong>${a.title}</strong><p>${a.desc}</p><p style="margin-top:7px">${a.time}</p></div><span class="tag ${a.type}">${a.type==="bad"?"URGENT":"REVIEW"}</span></div>`).join(""):'<div class="card">No pending alerts. All caught up! 🌱</div>';}
+function clearAlerts(){alerts=[];renderAlerts();renderOverview();}
+function addFarm(){const name=prompt("Enter a demo farm name:");if(!name||!name.trim())return;fields.push({name:name.trim(),crop:"New crop",moisture:60,ph:6.5,temp:27,status:"New",health:85,area:"5 acres"});renderFarms();renderOverview();alert("Demo farm added to this dashboard.");}
+function renderForecast(){$("forecast").innerHTML=[["Today","☀️","28°"],["Tue","⛅","29°"],["Wed","🌦️","27°"],["Thu","☀️","30°"],["Fri","🌧️","26°"],["Sat","⛅","28°"]].map(d=>`<div class="card" style="text-align:center;padding:15px"><div class="muted">${d[0]}</div><div style="font-size:27px;margin:10px">${d[1]}</div><strong>${d[2]}</strong></div>`).join("");}
+renderOverview();renderFarms();filterSoil();renderIrrigation();renderHealth();renderAlerts();renderForecast();
+drawMoistureChart();window.addEventListener("resize",()=>{drawMoistureChart();if($("soil").classList.contains("active"))drawSoilChart();});
+</script>
+</body>
+</html>
